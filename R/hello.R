@@ -86,6 +86,7 @@ decode_scel = function(scel,output=NULL,freq=1){
   output.w <- file(output, open = "ab", encoding = "UTF-8")
   tryCatch({
     writeBin(charToRaw(temp_res), output.w)
+    writeBin(charToRaw("\n"), output.w)
   },
   finally = {
     try(close(output.w))
