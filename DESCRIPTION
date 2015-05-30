@@ -1,0 +1,14 @@
+Package: cidian
+Type: Package
+Title:  Tools for Chinese Text Segmentation Dictionaries
+Version: 0.1
+Date: 2015-05-31
+Author: Qin Wenfeng
+Maintainer: Qin Wenfeng <mail@qinwf.com>
+Description: Tools for Chinese text segmentation dictionaries.
+License: MIT + file LICENSE
+LazyData: TRUE
+Depends:
+    R (>= 3.1), stringi,pbapply
+Suggests:
+    knitr,testthat,jiebaR
