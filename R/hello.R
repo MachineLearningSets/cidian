@@ -82,7 +82,11 @@ decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=T){
   teee_length = length(teee$text)
   now_index = CN_WORD_START
   if(progress ==T){
-    pboptions(type="tk",title="Decoding...")
+    if (.Platform$OS.type == "windows") {
+      pboptions(type="win",title="Decoding...")
+    } else{
+      pboptions(type="txt",title="Decoding...")
+    }
     pb <- startpb(0, teee_length)
   }
   while(now_index<teee_length ){
