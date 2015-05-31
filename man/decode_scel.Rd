@@ -4,7 +4,7 @@
 \alias{decode_scel}
 \title{Decode SCEL files}
 \usage{
-decode_scel(scel, output = NULL, freq = 1)
+decode_scel(scel, output = NULL, freq = 1, cpp = T, progress = T)
 }
 \arguments{
 \item{scel}{SCEL file path}
@@ -12,6 +12,10 @@ decode_scel(scel, output = NULL, freq = 1)
 \item{output}{output path}
 
 \item{freq}{default frequency}
+
+\item{cpp}{use Rcpp}
+
+\item{progress}{TRUE}
 }
 \description{
 This function can decode SCEL file into jiebaR dictionaries

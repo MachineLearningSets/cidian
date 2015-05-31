@@ -28,15 +28,45 @@ into_int1 = function(text,offset){
 #' @param scel SCEL file path
 #' @param output output path
 #' @param freq default frequency
+#' @param cpp use Rcpp
+#' @param progress TRUE
 #' @examples
 #' \dontrun{
 #' decode_scel(scel = "test.scel",output = "test.dict",freq = 1)
 #' }
 #' @export
-decode_scel = function(scel,output=NULL,freq=1){
-
+decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=T){
 
   info_file = file.info(scel)
+  if(!file.exists(scel)){
+    stop("no such files.")
+  }
+  if(is.null(output)){
+    basenames <- gsub("\\.[^\\.]*$", "", scel[1])
+    extnames  <- gsub(basenames, "", scel[1], fixed = TRUE)
+    times_char = gsub(" |:","_",as.character(Sys.time()))
+    output    <- paste(basenames, extnames,"_",times_char ,".dict", sep = "")
+  }
+
+  if(cpp==T){
+
+    temp_res = decode_scel_cpp(scel,output,freq,progress)
+    temp_res = stri_split_fixed(stri_encode(temp_res,from = FILE_ENCODING,to = "UTF-8"),"\n")[[1]]
+    temp_res = paste(paste(temp_res[!(temp_res=="")],freq),collapse ="\n")
+    output.w <- file(output, open = "ab", encoding = "UTF-8")
+    tryCatch({
+      writeBin(charToRaw(temp_res), output.w)
+      writeBin(charToRaw("\n"), output.w)
+    },
+    finally = {
+      try(close(output.w))
+    }
+    )
+
+
+    # end cpp part
+  } else {
+  # R part
 
   # teee[c(CN_WORD_START,CN_WORD_START+1)]
   teee = new.env(parent = emptyenv())
@@ -51,10 +81,14 @@ decode_scel = function(scel,output=NULL,freq=1){
   index_res = 1
   teee_length = length(teee$text)
   now_index = CN_WORD_START
-  pboptions(type="tk",title="Decoding...")
-  pb <- startpb(0, teee_length)
+  if(progress ==T){
+    pboptions(type="tk",title="Decoding...")
+    pb <- startpb(0, teee_length)
+  }
   while(now_index<teee_length ){
-    setpb(pb, now_index)
+    if(progress ==T){
+      setpb(pb, now_index)
+    }
     samePinyinCount = into_int2(teee,now_index)
     pyIndexBytesLength = into_int2(teee,now_index+2)
     now_index = now_index+4 +pyIndexBytesLength
@@ -74,15 +108,9 @@ decode_scel = function(scel,output=NULL,freq=1){
 
   }
   temp_res = paste(paste(temp_res[!(temp_res=="")],freq),collapse ="\n")
-
-  closepb(pb)
-
-  if(is.null(output)){
-    basenames <- gsub("\\.[^\\.]*$", "", scel[1])
-    extnames  <- gsub(basenames, "", scel[1], fixed = TRUE)
-    output    <- paste(basenames, extnames, as.numeric(Sys.time()),".dict", sep = "")
+  if(progress ==T){
+    closepb(pb)
   }
-
   output.w <- file(output, open = "ab", encoding = "UTF-8")
   tryCatch({
     writeBin(charToRaw(temp_res), output.w)
@@ -92,4 +120,8 @@ decode_scel = function(scel,output=NULL,freq=1){
     try(close(output.w))
   }
   )
+  # end R part
+  }
+  message(paste("output file:",output))
+
 }

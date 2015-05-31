@@ -8,6 +8,8 @@ Maintainer: Qin Wenfeng <mail@qinwf.com>
 Description: Tools for Chinese text segmentation dictionaries.
 License: MIT + file LICENSE
 LazyData: TRUE
+Imports: Rcpp,RcppProgress
+LinkingTo: Rcpp,RcppProgress
 Depends:
     R (>= 3.1), stringi,pbapply
 Suggests:
