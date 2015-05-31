@@ -18,7 +18,7 @@ This function can load jiebaR dictionaries
 }
 \examples{
 \dontrun{
-decode_scel(scel = "test.scel",output = "test.dict",freq = 1)
+test = loaddict("yy.dict",1,"tag")
 }
 }
 

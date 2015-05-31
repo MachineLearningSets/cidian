@@ -6,7 +6,7 @@
 #' @param defaultTag default frequency
 #' @examples
 #' \dontrun{
-#' decode_scel(scel = "test.scel",output = "test.dict",freq = 1)
+#' test = loaddict("yy.dict",1,"tag")
 #' }
 #' @export
 loaddict = function(filePath, defaultWeight, defaultTag){
@@ -17,21 +17,32 @@ loaddict = function(filePath, defaultWeight, defaultTag){
   tes
 }
 
+#' Add or remove words from list
+#'
+#' add or remove words from list
+#' @param dict a list
+#' @param words words to add or remove
+#' @param tags POS tags
+#' @examples
+#' \dontrun{
+#' remove_user_words(dict,words)
+#' }
 #' @export
-remove_words = function(dict,words){
+remove_user_words = function(dict,words){
   for(wod in words){
     dict[[wod]] = NULL
   }
   return(dict)
 }
 
+#' @rdname remove_words
 #' @export
-add_words = function(dict,words,freqs){
-  if(length(words)!=length(freqs)){
+add_user_words = function(dict,words,tags){
+  if(length(words)!=length(tags)){
     stop("no freqs for words")
   }
   for(wod in 1:length(words)){
-    dict[[words[wod]]] = as.character(freq[i])
+    dict[[words[wod]]] = as.character(tags[wod])
   }
   return(dict)
 }
