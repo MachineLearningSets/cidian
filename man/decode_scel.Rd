@@ -4,7 +4,7 @@
 \alias{decode_scel}
 \title{Decode SCEL files}
 \usage{
-decode_scel(scel, output = NULL, freq = 1, cpp = T, progress = T)
+decode_scel(scel, output = NULL, freq = 1, cpp = T, progress = F)
 }
 \arguments{
 \item{scel}{SCEL file path}
