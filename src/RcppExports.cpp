@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+// loadUserDict
+List loadUserDict(CharacterVector filePath, IntegerVector defaultWeight, CharacterVector defaultTag);
+RcppExport SEXP cidian_loadUserDict(SEXP filePathSEXP, SEXP defaultWeightSEXP, SEXP defaultTagSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type filePath(filePathSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type defaultWeight(defaultWeightSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type defaultTag(defaultTagSEXP);
+    __result = Rcpp::wrap(loadUserDict(filePath, defaultWeight, defaultTag));
+    return __result;
+END_RCPP
+}
 // decode_scel_cpp
 RawVector decode_scel_cpp(CharacterVector file, CharacterVector output, NumericVector freq, bool disp);
 RcppExport SEXP cidian_decode_scel_cpp(SEXP fileSEXP, SEXP outputSEXP, SEXP freqSEXP, SEXP dispSEXP) {
