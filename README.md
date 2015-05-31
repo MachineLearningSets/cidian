@@ -10,6 +10,8 @@ Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](
 install.packages("devtools")
 install.packages("stringi")
 install.packages("pbapply")
+install.packages("Rcpp")
+install.packages("RcppProgress")
 library(devtools)
 install_github("qinwf/cidian")
 ```
@@ -17,5 +19,7 @@ install_github("qinwf/cidian")
 ## 使用
 
 ```r
-decode_scel("细胞词库路径","输出文件路径")
+decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp = TRUE)
+
+decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp = FALSE,progress =TRUE)
 ```
