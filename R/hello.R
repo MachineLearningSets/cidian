@@ -35,7 +35,7 @@ into_int1 = function(text,offset){
 #' decode_scel(scel = "test.scel",output = "test.dict",freq = 1)
 #' }
 #' @export
-decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=T){
+decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=F){
 
   info_file = file.info(scel)
   if(!file.exists(scel)){
