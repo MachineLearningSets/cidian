@@ -1,4 +1,4 @@
-#' LoadDIctionaries
+#' Load DIctionaries
 #'
 #' This function can load jiebaR dictionaries
 #' @param filePath SCEL file path
@@ -35,7 +35,7 @@ remove_user_words = function(dict,words){
   return(dict)
 }
 
-#' @rdname remove_words
+#' @rdname remove_user_words
 #' @export
 add_user_words = function(dict,words,tags){
   if(length(words)!=length(tags)){

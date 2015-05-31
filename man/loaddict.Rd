@@ -2,7 +2,7 @@
 % Please edit documentation in R/loaddict.R
 \name{loaddict}
 \alias{loaddict}
-\title{LoadDIctionaries}
+\title{Load DIctionaries}
 \usage{
 loaddict(filePath, defaultWeight, defaultTag)
 }

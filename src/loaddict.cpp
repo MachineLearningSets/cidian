@@ -4,7 +4,6 @@
 #include <vector>
 #include <fstream>
 #include "Limonp/StringUtil.hpp"
-#include "Limonp/Logger.hpp"
 using namespace Rcpp;
 using namespace std;
 using namespace Limonp;
