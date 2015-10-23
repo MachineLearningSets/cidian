@@ -65,6 +65,8 @@ fl.close();
   for(size_t ni=0;ni<12;ni++){
     //Rprintf( "%.2x",header_byte[ni] );
     if(header_byte[ni]!= header_scel[ni]){
+      delete [] header_byte;
+      delete [] ret;
       stop("not a valid .scel file?");
     }
   }
