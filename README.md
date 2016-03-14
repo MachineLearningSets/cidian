@@ -2,7 +2,9 @@
 
 分词词典工具
 
-Linux : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=master)](https://travis-ci.org/qinwf/jiebaR)　Mac : [![Build Status](https://travis-ci.org/qinwf/jiebaR.svg?branch=osx)](https://travis-ci.org/qinwf/jiebaR)　Win : [![Build status](https://ci.appveyor.com/api/projects/status/k8swxpkue1caiiwi/branch/master?svg=true)](https://ci.appveyor.com/project/qinwf53234/jiebar/branch/master)
+Linux : [![Build Status](https://travis-ci.org/qinwf/cidian.svg?branch=master)](https://travis-ci.org/qinwf/cidian)　Mac : [![Build Status](https://travis-ci.org/qinwf/cidian.svg?branch=osx)](https://travis-ci.org/qinwf/cidian)　Win : [![Build status](https://ci.appveyor.com/api/projects/status/d1omhpb0tc165bu0/branch/master?svg=true)](https://ci.appveyor.com/project/qinwf/cidian/branch/master)
+
+
 
 ## 安装
 
