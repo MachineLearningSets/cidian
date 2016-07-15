@@ -50,8 +50,8 @@ unsigned int get_one(size_t begin, unsigned char *ret){
 
 
 // [[Rcpp::export]]
-RawVector decode_scel_cpp(CharacterVector file, CharacterVector output,NumericVector freq, bool disp) {
-  const char *const name = file[0];
+RawVector decode_scel_cpp(std::string file, std::string output,std::string tag, bool disp) {
+  const char *const name = file.c_str();
   ifstream fl(name);
   fl.seekg( 0, ios::end );
   size_t len = fl.tellg();

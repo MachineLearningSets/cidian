@@ -4,14 +4,14 @@
 \alias{decode_scel}
 \title{Decode SCEL files}
 \usage{
-decode_scel(scel, output = NULL, freq = 1, cpp = T, progress = F)
+decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F)
 }
 \arguments{
 \item{scel}{SCEL file path}
 
 \item{output}{output path}
 
-\item{freq}{default frequency}
+\item{tag}{default tag}
 
 \item{cpp}{use Rcpp}
 
@@ -22,7 +22,7 @@ This function can decode SCEL file into jiebaR dictionaries
 }
 \examples{
 \dontrun{
-decode_scel(scel = "test.scel",output = "test.dict",freq = 1)
+decode_scel(scel = "test.scel",output = "test.dict",tag = 1)
 }
 }
 

@@ -53,16 +53,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // decode_scel_cpp
-RawVector decode_scel_cpp(CharacterVector file, CharacterVector output, NumericVector freq, bool disp);
-RcppExport SEXP cidian_decode_scel_cpp(SEXP fileSEXP, SEXP outputSEXP, SEXP freqSEXP, SEXP dispSEXP) {
+RawVector decode_scel_cpp(std::string file, std::string output, std::string tag, bool disp);
+RcppExport SEXP cidian_decode_scel_cpp(SEXP fileSEXP, SEXP outputSEXP, SEXP tagSEXP, SEXP dispSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type file(fileSEXP);
-    Rcpp::traits::input_parameter< CharacterVector >::type output(outputSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type freq(freqSEXP);
+    Rcpp::traits::input_parameter< std::string >::type file(fileSEXP);
+    Rcpp::traits::input_parameter< std::string >::type output(outputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type tag(tagSEXP);
     Rcpp::traits::input_parameter< bool >::type disp(dispSEXP);
-    __result = Rcpp::wrap(decode_scel_cpp(file, output, freq, disp));
+    __result = Rcpp::wrap(decode_scel_cpp(file, output, tag, disp));
     return __result;
 END_RCPP
 }

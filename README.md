@@ -25,3 +25,9 @@ decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp = TRUE
 
 decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp = FALSE,progress =TRUE)
 ```
+
+## 
+
+```r
+
+```

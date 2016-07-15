@@ -17,7 +17,7 @@ gen_user_character <- function(input, disp) {
     .Call('cidian_gen_user_character', PACKAGE = 'cidian', input, disp)
 }
 
-decode_scel_cpp <- function(file, output, freq, disp) {
-    .Call('cidian_decode_scel_cpp', PACKAGE = 'cidian', file, output, freq, disp)
+decode_scel_cpp <- function(file, output, tag, disp) {
+    .Call('cidian_decode_scel_cpp', PACKAGE = 'cidian', file, output, tag, disp)
 }
 

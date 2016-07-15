@@ -27,15 +27,15 @@ into_int1 = function(text,offset){
 #' This function can decode SCEL file into jiebaR dictionaries
 #' @param scel SCEL file path
 #' @param output output path
-#' @param freq default frequency
+#' @param tag default tag
 #' @param cpp use Rcpp
 #' @param progress TRUE
 #' @examples
 #' \dontrun{
-#' decode_scel(scel = "test.scel",output = "test.dict",freq = 1)
+#' decode_scel(scel = "test.scel",output = "test.dict",tag = 1)
 #' }
 #' @export
-decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=F){
+decode_scel = function(scel,output=NULL,tag="n",cpp=T,progress=F){
 
   info_file = file.info(scel)
   if(!file.exists(scel)){
@@ -50,9 +50,9 @@ decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=F){
 
   if(cpp==T){
 
-    temp_res = decode_scel_cpp(scel,output,freq,progress)
+    temp_res = decode_scel_cpp(scel,output,tag,progress)
     temp_res = stri_split_fixed(stri_encode(temp_res,from = FILE_ENCODING,to = "UTF-8"),"\n")[[1]]
-    temp_res = paste(paste(temp_res[!(temp_res=="")],freq),collapse ="\n")
+    temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
     output.w <- file(output, open = "ab", encoding = "UTF-8")
     tryCatch({
       writeBin(charToRaw(temp_res), output.w)
@@ -111,7 +111,7 @@ decode_scel = function(scel,output=NULL,freq=1,cpp=T,progress=F){
     }
 
   }
-  temp_res = paste(paste(temp_res[!(temp_res=="")],freq),collapse ="\n")
+  temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
   if(progress ==T){
     closepb(pb)
   }
