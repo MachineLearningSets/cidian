@@ -42,7 +42,7 @@ add_user_words(dict = "load_user_dict 读取的词典", words = "UTF-8 编码文
 
 ## 增加系统词典词
 
-add_sys_words(dict = "load_user_dict 读取的词典", words = "UTF-8 编码文本向量", freq = "词频", tags = "标记")
+add_sys_words(dict = "load_sys_dict 读取的词典", words = "UTF-8 编码文本向量", freq = "词频", tags = "标记")
 
 ## 删除词典词
 
