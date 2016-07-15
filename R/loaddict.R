@@ -21,10 +21,11 @@ load_user_dict = function(filePath, default_tag= "n"){
 #' @param words words to add or remove
 #' @examples
 #' \dontrun{
-#' remove_user_words(dict,words)
+#' remove_words(dict,words)
 #' }
 #' @export
-remove_user_words = function(dict,words){
+remove_words = function(dict,words){
+  stopifnot(inherits(dict,"user_dict") || inherits(dict,"sys_dict"))
   for(wod in words){
     dict[[wod]] = NULL
   }
@@ -65,22 +66,7 @@ load_sys_dict = function(filePath){
   dict
 }
 
-#' Add or remove words from list
-#'
-#' add or remove words from list
-#' @param dict a list
-#' @param words words to add or remove
-#' @examples
-#' \dontrun{
-#' remove_user_words(dict,words)
-#' }
-#' @export
-remove_sys_words = function(dict,words){
-  for(wod in words){
-    dict[[wod]] = NULL
-  }
-  return(dict)
-}
+
 
 #' Add or remove words from list
 #'
