@@ -10,3 +10,4 @@ tests/testthat/test-all\.R
 tests/testthat/test-bylines\.R
 ^.*\.scel$
 ^.*\.dict$
+^doc/

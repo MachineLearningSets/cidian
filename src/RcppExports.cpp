@@ -6,15 +6,49 @@
 using namespace Rcpp;
 
 // loadUserDict
-List loadUserDict(CharacterVector filePath, IntegerVector defaultWeight, CharacterVector defaultTag);
-RcppExport SEXP cidian_loadUserDict(SEXP filePathSEXP, SEXP defaultWeightSEXP, SEXP defaultTagSEXP) {
+List loadUserDict(std::string filePath, std::string defaultTag);
+RcppExport SEXP cidian_loadUserDict(SEXP filePathSEXP, SEXP defaultTagSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type filePath(filePathSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type defaultWeight(defaultWeightSEXP);
-    Rcpp::traits::input_parameter< CharacterVector >::type defaultTag(defaultTagSEXP);
-    __result = Rcpp::wrap(loadUserDict(filePath, defaultWeight, defaultTag));
+    Rcpp::traits::input_parameter< std::string >::type filePath(filePathSEXP);
+    Rcpp::traits::input_parameter< std::string >::type defaultTag(defaultTagSEXP);
+    __result = Rcpp::wrap(loadUserDict(filePath, defaultTag));
+    return __result;
+END_RCPP
+}
+// loadSysDict
+List loadSysDict(const std::string& filePath);
+RcppExport SEXP cidian_loadSysDict(SEXP filePathSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const std::string& >::type filePath(filePathSEXP);
+    __result = Rcpp::wrap(loadSysDict(filePath));
+    return __result;
+END_RCPP
+}
+// gen_sys_character
+CharacterVector gen_sys_character(List input, bool disp);
+RcppExport SEXP cidian_gen_sys_character(SEXP inputSEXP, SEXP dispSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< List >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< bool >::type disp(dispSEXP);
+    __result = Rcpp::wrap(gen_sys_character(input, disp));
+    return __result;
+END_RCPP
+}
+// gen_user_character
+CharacterVector gen_user_character(List input, bool disp);
+RcppExport SEXP cidian_gen_user_character(SEXP inputSEXP, SEXP dispSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< List >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< bool >::type disp(dispSEXP);
+    __result = Rcpp::wrap(gen_user_character(input, disp));
     return __result;
 END_RCPP
 }

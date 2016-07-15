@@ -1,25 +1,25 @@
 #ifndef LIMONP_CODE_CONVERTER_HPP
 #define LIMONP_CODE_CONVERTER_HPP
 
-#include <iconv.h> 
-#include <iostream> 
+#include <iconv.h>
+#include <iostream>
 #include <memory.h>
 
-namespace Limonp
+namespace limonp
 {
-    using namespace std; 
+    using namespace std;
     class CodeConverter
-    { 
-        public: 
-            CodeConverter(const char *from_charset,const char *to_charset) 
-            { 
-                iconv__handle = iconv_open(to_charset,from_charset); 
-            } 
+    {
+        public:
+            CodeConverter(const char *from_charset,const char *to_charset)
+            {
+                iconv__handle = iconv_open(to_charset,from_charset);
+            }
 
-            ~CodeConverter() 
-            { 
-                iconv_close(iconv__handle); 
-            } 
+            ~CodeConverter()
+            {
+                iconv_close(iconv__handle);
+            }
 
             bool convert(const string& from, string& to) const
             {
@@ -36,10 +36,10 @@ namespace Limonp
                 to.resize(to.size() - to_size);
                 return true;
             }
-        private: 
-            iconv_t iconv__handle; 
-    }; 
-    
+        private:
+            iconv_t iconv__handle;
+    };
+
     inline bool code_convert(const char* from_charset, const char* to_charset, const string& from, string& to)
     {
         CodeConverter cc(from_charset, to_charset);
