@@ -9,10 +9,13 @@
 using namespace Rcpp;
 using namespace std;
 
-const size_t CN_WORD_START = 0x2627;
+const size_t CN_WORD_START_1 = 0x2627;
+const size_t CN_WORD_START_2 = 0x26C3;
 
-unsigned char const header_scel[] = {0x40, 0x15, 0x00, 0x00, 0x44, 0x43, 0x53, 0x01, 0x01,
-              0x00, 0x00, 0x00};
+unsigned char const header_scel[] = {0x40, 0x15, 0x00, 0x00};
+
+// unsigned char const header_scel[] = {0x40, 0x15, 0x00, 0x00, 0x44, 0x43, 0x53, 0x01, 0x01,
+//                                     0x00, 0x00, 0x00};
 
 unsigned char* copy_next_nbytes(size_t n,size_t begin, unsigned char *ret){
   unsigned char *res = new unsigned char[n];
@@ -61,8 +64,8 @@ RawVector decode_scel_cpp(std::string file, std::string output,std::string tag, 
 fl.close();
   vector<Rbyte> res;
   res.reserve(1000000);
-  auto header_byte = copy_next_nbytes(12,0,ret);
-  for(size_t ni=0;ni<12;ni++){
+  auto header_byte = copy_next_nbytes(5,0,ret);
+  for(size_t ni=0;ni<4;ni++){
     //Rprintf( "%.2x",header_byte[ni] );
     if(header_byte[ni]!= header_scel[ni]){
       delete [] header_byte;
@@ -70,9 +73,17 @@ fl.close();
       stop("not a valid .scel file?");
     }
   }
+
+  size_t begin = 0;
+
+  if (header_byte[4] == 0x44){
+    begin = CN_WORD_START_1+1;
+  } else {
+    begin = CN_WORD_START_2+1;
+  }
+
   delete [] header_byte;
 
-  size_t begin = CN_WORD_START+1;
   Progress p(len,disp);
   p.update(begin);
 

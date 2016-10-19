@@ -11,8 +11,7 @@ DESCRIPTION_END = 0xd40 +1 ;
 EXAMPLE_START = 0xd40 +1 ;
 EXAMPLE_END = PY_START;
 
-scel_header = as.raw(c(0x40, 0x15, 0x00, 0x00, 0x44, 0x43, 0x53, 0x01, 0x01,
-                       0x00, 0x00, 0x00))
+scel_header = as.raw(c(0x40, 0x15, 0x00, 0x00))
 
 into_int2 = function(text,offset){
   as.numeric(paste("0x",paste(text$text[c(offset,offset+1)],collapse = ""),sep = ""))
@@ -72,10 +71,16 @@ decode_scel = function(scel,output=NULL,tag="n",cpp=T,progress=F){
   teee = new.env(parent = emptyenv())
   teee$text = readBin(scel,"raw",n = info_file$size)
 
-  if(!all(teee$text[1:12] == scel_header)){
+  if(!all(teee$text[1:4] == scel_header)){
     stop("not a valid .scel file?")
   }
 
+  # https://github.com/Zehao/sogouSCEL/blob/master/src/org/hnote/sogou/SCEL.java
+  if (teee$text[5] == 0x44){
+    CN_WORD_START = 0x2628;
+  }else{
+    CN_WORD_START = 0x26C4;
+  }
   temp_res = character(length = 10^7)
   base_index = 0
   index_res = 1
