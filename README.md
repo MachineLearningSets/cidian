@@ -21,9 +21,12 @@ install_github("qinwf/cidian")
 ## 使用
 
 ```r
-decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp = TRUE)
+decode_scel(scel = "细胞词库路径", output = "输出文件路径", cpp =  TRUE)
 
-decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp = FALSE,progress =TRUE)
+decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp =  FALSE, progress = TRUE)
+
+# 输出调试信息
+decode_scel(scel = "细胞词库路径", output = "输出文件路径", cpp = FALSE, progress = TRUE, rdebug = TRUE)
 ```
 
 ## 读取词典和编辑词典文件
