@@ -16,4 +16,4 @@ Depends:
     stringi,pbapply
 Suggests:
     knitr,testthat,jiebaR
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

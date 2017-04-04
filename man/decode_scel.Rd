@@ -4,7 +4,8 @@
 \alias{decode_scel}
 \title{Decode SCEL files}
 \usage{
-decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F)
+decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F,
+  rdebug = FALSE)
 }
 \arguments{
 \item{scel}{SCEL file path}
@@ -16,6 +17,8 @@ decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F)
 \item{cpp}{use Rcpp}
 
 \item{progress}{TRUE}
+
+\item{rdebug}{display debug info}
 }
 \description{
 This function can decode SCEL file into jiebaR dictionaries
@@ -25,4 +28,3 @@ This function can decode SCEL file into jiebaR dictionaries
 decode_scel(scel = "test.scel",output = "test.dict",tag = 1)
 }
 }
-

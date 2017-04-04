@@ -19,4 +19,3 @@ This function can load a jiebaR user dictionary, and then we can use remove_user
 test = load_user_dict(jiebaR::USERPATH)
 }
 }
-

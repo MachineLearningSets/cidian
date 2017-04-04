@@ -24,4 +24,3 @@ sysd = load_sys_dict(jiebaR::DICTPATH)
 write_dict(sysd,"somepath")
 }
 }
-

@@ -17,4 +17,3 @@ This function can load a jiebaR system dictionary, and then we can use remove_sy
 test = load_sys_dict(jiebaR::DICTPATH)
 }
 }
-

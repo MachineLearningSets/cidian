@@ -18,4 +18,3 @@ add_sys_words(dict, words, freq, tags)
 \description{
 Add or remove words from list
 }
-

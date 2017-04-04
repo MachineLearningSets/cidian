@@ -29,12 +29,13 @@ into_int1 = function(text,offset){
 #' @param tag default tag
 #' @param cpp use Rcpp
 #' @param progress TRUE
+#' @param rdebug display debug info
 #' @examples
 #' \dontrun{
 #' decode_scel(scel = "test.scel",output = "test.dict",tag = 1)
 #' }
 #' @export
-decode_scel = function(scel,output=NULL,tag="n",cpp=T,progress=F){
+decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE){
 
   info_file = file.info(scel)
   if(!file.exists(scel)){
@@ -105,11 +106,20 @@ decode_scel = function(scel,output=NULL,tag="n",cpp=T,progress=F){
 
       cnWordLength = into_int1(teee,now_index+1)
       if(index_res>10^7){
+        if(rdebug){
+          message("bump cache")
+        }
         temp_res = c(temp_res,character(length = 10^7))
         index_res = 1
         base_index = base_index+10^7
       }
+      if(rdebug){
+        message(sprintf("now_index: %s ,word_begin: %s, word_end: %s ", now_index, now_index+2+1, now_index+2+cnWordLength))
+      }
       temp_res[base_index+index_res] = stri_encode(teee$text[(now_index+2+1):(now_index+2+cnWordLength)],from = FILE_ENCODING,to = "UTF-8")
+      if(rdebug){
+        message(sprintf("word: %s", temp_res[base_index+index_res]))
+      }
       index_res = index_res + 1
       now_index = now_index+2+cnWordLength+12
 

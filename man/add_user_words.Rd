@@ -16,4 +16,3 @@ add_user_words(dict, words, tags)
 \description{
 add or remove words from list
 }
-
