@@ -101,6 +101,10 @@ fl.close();
     begin = begin + 4 + pyIndexBytesLength;
     for(size_t nj=1;nj<=samePinyinCount;nj++){
       cnWordLength = ret[begin];
+      if(cnWordLength<=0){
+        Rcpp::warning("This file may contain a DELTBL at the end of the file.");
+        goto RETURN_STATE;
+      }
       for(size_t j=1;j<=cnWordLength;j++){
         res.push_back(ret[begin+ 1+j]);
         }
@@ -109,6 +113,8 @@ fl.close();
       begin = begin + 2 + cnWordLength + 12;
     }
   }
+
+RETURN_STATE:
   delete [] ret;
   return wrap(res);
 }

@@ -95,7 +95,8 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE)
     }
     pb <- startpb(0, teee_length)
   }
-  while(now_index<teee_length ){
+  none_break = TRUE
+  while(now_index<teee_length && none_break){
     if(progress ==T){
       setpb(pb, now_index)
     }
@@ -105,6 +106,11 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE)
     for( i in 1:samePinyinCount ){
 
       cnWordLength = into_int1(teee,now_index+1)
+      if(cnWordLength<=0){
+        none_break = FALSE
+        warning("This file may contain a DELTBL at the end of the file.")
+        break
+      }
       if(index_res>10^7){
         if(rdebug){
           message("bump cache")
@@ -117,6 +123,7 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE)
         message(sprintf("now_index: %s ,word_begin: %s, word_end: %s ", now_index, now_index+2+1, now_index+2+cnWordLength))
       }
       temp_res[base_index+index_res] = stri_encode(teee$text[(now_index+2+1):(now_index+2+cnWordLength)],from = FILE_ENCODING,to = "UTF-8")
+
       if(rdebug){
         message(sprintf("word: %s", temp_res[base_index+index_res]))
       }
