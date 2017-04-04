@@ -27,6 +27,9 @@ decode_scel(scel = "细胞词库路径",output = "输出文件路径",cpp =  FAL
 
 # 输出调试信息
 decode_scel(scel = "细胞词库路径", output = "输出文件路径", cpp = FALSE, progress = TRUE, rdebug = TRUE)
+
+# system dict with frequency
+decode_scel("细胞词库路径", output = "输出文件路径", sysdict_freq = 1)
 ```
 
 ## 读取词典和编辑词典文件

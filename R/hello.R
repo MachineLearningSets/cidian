@@ -30,12 +30,14 @@ into_int1 = function(text,offset){
 #' @param cpp use Rcpp
 #' @param progress TRUE
 #' @param rdebug display debug info
+#' @param sysdict_freq system dict frequency info, a numeric vector
 #' @examples
 #' \dontrun{
 #' decode_scel(scel = "test.scel",output = "test.dict",tag = 1)
 #' }
 #' @export
-decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE){
+decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE, sysdict_freq=NULL){
+  stopifnot(is.numeric(sysdict_freq) || is.integer(sysdict_freq))
 
   info_file = file.info(scel)
   if(!file.exists(scel)){
@@ -52,7 +54,11 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE)
 
     temp_res = decode_scel_cpp(scel,output,tag,progress)
     temp_res = stri_split_fixed(stri_encode(temp_res,from = FILE_ENCODING,to = "UTF-8"),"\n")[[1]]
-    temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+    if(is.null(sysdict_freq)){
+      temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+    }else{
+      temp_res = paste(paste(temp_res[!(temp_res=="")], sysdict_freq, tag),collapse ="\n")
+    }
     output.w <- file(output, open = "ab", encoding = "UTF-8")
     tryCatch({
       writeBin(charToRaw(temp_res), output.w)
@@ -133,7 +139,11 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE)
     }
 
   }
-  temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+  if(is.null(sysdict_freq)){
+    temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+  }else{
+    temp_res = paste(paste(temp_res[!(temp_res=="")], sysdict_freq, tag),collapse ="\n")
+  }
   if(progress ==T){
     closepb(pb)
   }

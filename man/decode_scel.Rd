@@ -5,7 +5,7 @@
 \title{Decode SCEL files}
 \usage{
 decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F,
-  rdebug = FALSE)
+  rdebug = FALSE, sysdict_freq = NULL)
 }
 \arguments{
 \item{scel}{SCEL file path}
@@ -19,6 +19,8 @@ decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F,
 \item{progress}{TRUE}
 
 \item{rdebug}{display debug info}
+
+\item{sysdict_freq}{system dict frequency info, a numeric vector}
 }
 \description{
 This function can decode SCEL file into jiebaR dictionaries
