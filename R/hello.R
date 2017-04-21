@@ -37,7 +37,7 @@ into_int1 = function(text,offset){
 #' }
 #' @export
 decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE, sysdict_freq=NULL){
-  stopifnot(is.numeric(sysdict_freq) || is.integer(sysdict_freq))
+  stopifnot(is.null(sysdict_freq) || is.numeric(sysdict_freq) || is.integer(sysdict_freq))
 
   info_file = file.info(scel)
   if(!file.exists(scel)){
