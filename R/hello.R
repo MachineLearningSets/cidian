@@ -31,12 +31,13 @@ into_int1 = function(text,offset){
 #' @param progress TRUE
 #' @param rdebug display debug info
 #' @param sysdict_freq system dict frequency info, a numeric vector
+#' @param no_tag remove tag col, useful if we only need the texts output
 #' @examples
 #' \dontrun{
 #' decode_scel(scel = "test.scel",output = "test.dict",tag = 1)
 #' }
 #' @export
-decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE, sysdict_freq=NULL){
+decode_scel = function(scel,output=NULL,tag="n", cpp=TRUE,progress=FALSE, rdebug=FALSE, sysdict_freq=NULL, no_tag = FALSE){
   stopifnot(is.null(sysdict_freq) || is.numeric(sysdict_freq) || is.integer(sysdict_freq))
 
   info_file = file.info(scel)
@@ -55,7 +56,11 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE,
     temp_res = decode_scel_cpp(scel,output,tag,progress)
     temp_res = stri_split_fixed(stri_encode(temp_res,from = FILE_ENCODING,to = "UTF-8"),"\n")[[1]]
     if(is.null(sysdict_freq)){
-      temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+      if(no_tag){
+        temp_res = paste(temp_res[!(temp_res=="")],collapse ="\n")
+      }else{
+        temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+      }
     }else{
       temp_res = paste(paste(temp_res[!(temp_res=="")], sysdict_freq, tag),collapse ="\n")
     }
@@ -140,8 +145,14 @@ decode_scel = function(scel,output=NULL,tag="n", cpp=T,progress=F, rdebug=FALSE,
 
   }
   if(is.null(sysdict_freq)){
-    temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
-  }else{
+
+    if(no_tag){
+      temp_res = paste(temp_res[!(temp_res=="")],collapse ="\n")
+    }else{
+      temp_res = paste(paste(temp_res[!(temp_res=="")],tag),collapse ="\n")
+    } # no_tag
+
+    }else{
     temp_res = paste(paste(temp_res[!(temp_res=="")], sysdict_freq, tag),collapse ="\n")
   }
   if(progress ==T){

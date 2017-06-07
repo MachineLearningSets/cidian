@@ -4,8 +4,8 @@
 \alias{decode_scel}
 \title{Decode SCEL files}
 \usage{
-decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F,
-  rdebug = FALSE, sysdict_freq = NULL)
+decode_scel(scel, output = NULL, tag = "n", cpp = TRUE,
+  progress = FALSE, rdebug = FALSE, sysdict_freq = NULL, no_tag = FALSE)
 }
 \arguments{
 \item{scel}{SCEL file path}
@@ -21,6 +21,8 @@ decode_scel(scel, output = NULL, tag = "n", cpp = T, progress = F,
 \item{rdebug}{display debug info}
 
 \item{sysdict_freq}{system dict frequency info, a numeric vector}
+
+\item{no_tag}{remove tag col, useful if we only need the texts output}
 }
 \description{
 This function can decode SCEL file into jiebaR dictionaries
